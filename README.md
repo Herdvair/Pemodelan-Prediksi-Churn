@@ -79,6 +79,6 @@ Kesimpulan :
 
 Diantara model diatas, Logistic Regression dengan SMOTEENN lebih baik dalam mengenali churn (recall tinggi), tapi dengan trade off false positive sangat banyak. Sehingga model ini sangat boros pada biaya marketing karena banyak pelanggan loyal salah sasaran. Disamping itu, sebenanrya recall SVM lebih baik daripada logistic namun model SVM terindikasi overfitting karena gap antara train dan test sangat jauh.
 
-# <img width="512" height="512" alt="image" src="https://github.com/user-attachments/assets/687bade0-8ab9-4917-abab-cfd169145ae8" />
+# 
 
 
