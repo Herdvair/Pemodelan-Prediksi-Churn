@@ -46,16 +46,17 @@ Pada eksperimen ini dilakukan identifikasi performa model dengan _weight-balance
 
 1. Model dengan _weight-balanced_
    
-   | Model | Dataset | True Positive | True Negative | False Positive | False Negative | Accuracy | Precision | Recall | F1-Score |
-| :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Model                | Dataset | True Positive | True Negative | False Positive | False Negative | Accuracy | Precision | Recall | F1-Score |
+|-----------------------|----------|----------------|----------------|----------------|----------------|-----------|------------|---------|-----------|
 | **Logistic Regression** | Train | 1134 | 4529 | 1827 | 510 | 0.7079 | 0.3830 | 0.6898 | 0.4925 |
-|  | Test | 280 | 1159 | 448 | 113 | 0.7195 | 0.3846 | 0.7125 | 0.4996 |
-| **KNN** | Train | 893 | 6136 | 220 | 751 | 0.8786 | 0.8023 | 0.5432 | 0.6478 |
-|  | Test | 177 | 1506 | 101 | 216 | 0.8415 | 0.6367 | 0.4504 | 0.5276 |
-| **Decision Tree** | Train | 1644 | 6356 | 0 | 0 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
-|  | Test | 191 | 1408 | 199 | 202 | 0.7995 | 0.4897 | 0.4860 | 0.4879 |
-| **SVM** | Train | 1315 | 5233 | 1123 | 329 | 0.8185 | 0.5394 | 0.7999 | 0.6443 |
-|  | Test | 303 | 1280 | 327 | 90 | 0.7915 | 0.4810 | 0.7710 | 0.5924 |
+|                       | Test  | 280  | 1159 | 448  | 113 | 0.7195 | 0.3846 | 0.7125 | 0.4996 |
+| **KNN**               | Train | 893  | 6136 | 220  | 751 | 0.8786 | 0.8023 | 0.5432 | 0.6478 |
+|                       | Test  | 177  | 1506 | 101  | 216 | 0.8415 | 0.6367 | 0.4504 | 0.5276 |
+| **Decision Tree**     | Train | 1644 | 6356 | 0    | 0   | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+|                       | Test  | 191  | 1408 | 199  | 202 | 0.7995 | 0.4897 | 0.4860 | 0.4879 |
+| **SVM**               | Train | 1315 | 5233 | 1123 | 329 | 0.8185 | 0.5394 | 0.7999 | 0.6443 |
+|                       | Test  | 303  | 1280 | 327  | 90  | 0.7915 | 0.4810 | 0.7710 | 0.5924 |
+
 
 Kesimpulan :
 
@@ -79,6 +80,26 @@ Kesimpulan :
 
 Diantara model diatas, Logistic Regression dengan SMOTEENN lebih baik dalam mengenali churn (recall tinggi), tapi dengan trade off false positive sangat banyak. Sehingga model ini sangat boros pada biaya marketing karena banyak pelanggan loyal salah sasaran. Disamping itu, sebenanrya recall SVM lebih baik daripada logistic namun model SVM terindikasi overfitting karena gap antara train dan test sangat jauh.
 
-# 
+# 📊	Analisis Churn
+
+Melalui berbagai pertimbangan, maka model yang akan digunakan pada Churn Analysis adalah SVM (weight=balanced). Hal ini dikarenakan dari sisi recall yang tinggi, modelnya cukup stabil dan tidak terlalu overfitting seperti model lain.
+
+**Asumsi:**
+
+Apabila perusahaan berhasil menahan seorang nasabah agar tidak melakukan churn, maka akan ada tambahan keuntungan bersih sebesar 500 dolar dari nasabah tersebut. Untuk mencapai hal ini, perusahaan berencana melakukan langkah marketing preventif, misalnya memberikan penawaran khusus bagi nasabah baru, menyelenggarakan loyalty program untuk pemegang kartu kredit, atau mengadakan program retensi secara personal melalui email, panggilan telepon, maupun iklan digital yang ditargetkan. Setiap upaya retensi ini membutuhkan biaya sebesar 50 dolar per nasabah. Perhitungan ini tidak memasukkan biaya operasional lainnya dan diasumsikan perusahaan memiliki anggaran memadai untuk menjalankan strategi retensi tersebut. Hasil prediksi churn (1) dari model akan digunakan untuk menentukan nasabah mana yang akan dijadikan sasaran intervensi marketing agar tidak berpindah ke layanan lain.
+
+**Prediksi Benar**
+
+- True Positive (TP) – 303 nasabah: Model memprediksi churn (1) dan kenyataannya nasabah memang berisiko churn. Artinya, intervensi marketing yang dilakukan berhasil menahan mereka agar tetap bertahan, sehingga keuntungan yang diperoleh dapat dihitung sebagai profit perusahaan.
+- True Negative (TN) – 1280 nasabah: Model memprediksi tidak churn (0) dan faktanya nasabah memang tidak churn. Dalam hal ini, model tepat mengenali nasabah yang tidak perlu tindakan retensi, sehingga tidak ada biaya tambahan dan tidak masuk dalam perhitungan profit.
+- Prediksi Salah
+False Positive (FP) – 327 nasabah: Model memprediksi churn (1) namun kenyataannya nasabah tidak churn. Mereka tetap menerima program retensi, sehingga perusahaan mengeluarkan biaya marketing yang sebenarnya tidak diperlukan. Meski demikian, nasabah tetap bertahan, sehingga hasil ini tetap diperhitungkan dalam estimasi profit dengan mempertimbangkan biaya yang dikeluarkan.
+- False Negative (FN) – 90 nasabah: Model memprediksi tidak churn (0) padahal kenyataannya nasabah benar-benar churn. Dalam kondisi ini, perusahaan gagal melakukan pencegahan sehingga kehilangan potensi keuntungan dari nasabah yang pergi. Dampak ini termasuk dalam perhitungan kerugian profit.
+
+**Kesimpulan**
+
+Keuntungan : 298650 $
+Kerugian : 45000 $
+Potensi keuntungan = 253650 $
 
 
