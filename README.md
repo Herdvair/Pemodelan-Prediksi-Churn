@@ -98,8 +98,8 @@ False Positive (FP) – 327 nasabah: Model memprediksi churn (1) namun kenyataan
 
 **Kesimpulan**
 
-Keuntungan : 298650 $
-Kerugian : 45000 $
-Potensi keuntungan = 253650 $
+- Keuntungan : 298650 $
+- Kerugian : 45000 $
+- Potensi keuntungan = 253650 $
 
 
